@@ -2,6 +2,6 @@ cifar10/
 embeddings/
 .DS_Store
 ikea/
-cifar10/
+nohup.out
 deep_fashion/
 .ipynb_checkpoints/
