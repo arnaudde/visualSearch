@@ -11,6 +11,29 @@ entre images. Nous avons pour cela \'evalu\'e diff\'erentes m\'ethodes, que nous
  \center
  \includegraphics[width = 0.8\textwidth]{figures/siamnet_arch}
  \caption{\label{siamnet_arch} \textbf{Architecture d'un r\'eseau siamois} Les poids des deux r\'eseaux sont li\'es. L'avant derni\`ere
- couche induit une m\'etrique apprise sur l'espace des features apprises. \textit{p} est une pr\'ediction logistique.
- (\protect\cite{koch2015siamese})}
+    couche induit une m\'etrique apprise sur l'espace des features apprises. \textit{p} est une pr\'ediction logistique.
+    \cite{koch2015siamese}}
 \end{figure}
+
+\subsection{R\'eseaux Triplets}
+
+Nous avons aussi essayé d'utiliser un \textit{réseau triplet}, qui ont été introduits pour la première fois par
+\cite{hoffer2014deep}.
+
+\begin{figure}[ht]
+    \center
+    \includegraphics[width = 0.6\textwidth]{figures/triplet_net}
+    \caption{\label{siamnet_arch} \textbf{Architecture d'un réseau triplet - changer d'image}
+    \cite{hoffer2014deep}}
+\end{figure}
+
+Les réseaux triplets sont une amélioration des réseaux siamois déjà susmentionnés. À chaque itération, le nombre
+d'images en entrée est de 3 : 
+
+\begin{itemize}
+    \item image de base
+    \item image similaire
+    \item image différente
+\end{itemize}
+
+Cela revient à ajouter un nouveau terme dans la fonction de perte du modèle. Cet ajout permet 

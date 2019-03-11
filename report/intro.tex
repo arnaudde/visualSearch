@@ -15,6 +15,27 @@ cet espace que l’étude de similarité est alors possible.
 Nous allons tout d'abord travailler sur l'apprentissage d'une fonction de similarité entre images, afin de nous attaquer
 au cas d'image matching.
 
-\subsection{État de l'art}
+\subsection*{État de l'art}
 
+DETAILLER
+\bigskip
+Pour approcher ce problème, nous avons tout d'abord lu la littérature récente sur le sujet. Ainsi, nous avons lu des
+papiers de eBay, Pinterest. La tendance globale est une utilisation de features extraites d'un réseau de neurones.
 
+Toutefois, nous nous sommes retrouvés confrontés à un problème : ces entités possèdent un nombre gigantesque de données
+auxquels une personne lambda n'a pas accès. 
+
+Par ailleurs, cette quantité de données possèdent parfois une structure particulière qui rend possible l'utilisation de
+méthodes spécialisées : Pinterest, par son statut de réseau social, possèdent des données organisées en graphes, et
+utilise donc des méthodes spécialisées. Ainsi, dans leur article \cite{ying2018graph}, Pinterest utilise des
+\textit{Graph Convolutional Neural Networks} (GCN), ce qui est possible uniquement grâce à la structure sous-jacente de
+graphe d'un réseau social.
+
+De même, eBay utilise dans \cite{yang2017visual} des métadonnées associées aux produits de sa plateforme. Dans cet
+article, eBay utilise un système de couches pour un retrieval précis et rapide à grande échelle : pour une image requête
+particulière, leur système utilise différents critères pour épurer petit à petit les résultats potentiels. Ils utilisent
+d'abord des features peu coûteuses à calculer et dont la comparaison est simple.
+
+Nous nous sommes concentrés sur l'aspect "Image Retrieval" en prenant compte des features extraites de réseaux de
+neurones profonds sans métadonnées. Pour cette extraction de features, nous allons comparer différents modèles que nous
+allons présenter après.
