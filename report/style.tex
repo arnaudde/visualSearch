@@ -1,0 +1,63 @@
+%%% This file defines some color and style for the latex listing package
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{codegreen}{rgb}{0,0.4,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{cyan}{rgb}{0,0.8,0.8}
+\definecolor{steelblue}{RGB}{70,130,180}
+\definecolor{gray60}{rgb}{0.6, 0.6, 0.6}
+% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolour}{rgb}{0.94,0.94,0.94}
+\definecolor{purpleU}{RGB}{48,10,36}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+
+
+\lstdefinestyle{Python}{ % Estilo de lenguaje Python
+    language=Python,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=3,
+    basicstyle={\small\ttfamily}
+}
+
+\lstdefinestyle{bash}{      % Estilo de lenguaje bash
+    language=bash,
+    numbers=left,
+    numbersep=5pt,
+    stepnumber=1,
+    commentstyle=\color{codegreen},
+    backgroundcolor=\color{backcolour},
+    basicstyle={\small\ttfamily},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    title=\lstname
+}
+
+\lstdefinestyle{terminal}{
+    backgroundcolor=\color{purpleU},
+    basicstyle=\scriptsize\color{white}\ttfamily
+    % basicstyle=\small\color{white}\ttfamily
+}

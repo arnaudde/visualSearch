@@ -5,3 +5,7 @@ ikea/
 nohup.out
 deep_fashion/
 .ipynb_checkpoints/
+report/*aux
+report/*log
+report/*pdf
+
