@@ -40,11 +40,26 @@ mesurent le degré de similarité entre les vecteurs considérés.
 Enfin, nous avons binarisé nos features, et utilisé une distance de Hamming pour mesurer les performances
 
 \subsection{R\'eseaux Siamois}
- 
+
+Les réseaux siamois sont une architecture introduite pour la première fois par \cite{signature1993bromley}. Cette
+architecture apprend à déterminer si deux images sont similaires ou non. Elle a d'abord été utilisé pour déterminer si
+deux signatures étaient identiques. Nous représentons l'architecture que nous utilisons dans la figure
+\ref{fig:siamese_arch}.
+
+On prend une paire d'images appartenant ou non à la même classe, et on extrait de chaque image un vecteur de feature
+avec le même DNN (Deep Neural Network). Dans notre cas, nous avons utilisé Inception V3 sans la dernière couche. On
+soustrait ensuite les deux vecteurs avant de leur appliquer la fonction valeur absolue. On applique ensuite au résultat
+une Fully Connected Layer (FCN) pour réduire la taille de l'embedding, puis une sigmoïde qui donne la probabilité que
+les deux images appartiennent à la même classe.
+
+Pour extraire les features de notre réseau siamois entrainé, nous récupérons les poids $W$ et $b$ de la couche FCN. Nous
+utilisons le DNN utilisé par le réseau siamois pour extraire une feature $x$ d'une image, puis nous calculons $Wx + b$
+pour obtenir la feature finale.
+
 \begin{figure}[ht]
     \center
     \includegraphics[width = 0.8\textwidth]{figures/siamese_arch.pdf}
-    \caption{\label{siamnet_arch} \textbf{Architecture d'un r\'eseau siamois}}
+    \caption{\label{fig:siamese_arch} \textbf{Architecture d'un r\'eseau siamois}}
 \end{figure}
 
 \subsection{R\'eseaux Triplets}
@@ -54,18 +69,17 @@ Nous avons aussi essayé d'utiliser un \textit{réseau triplet}, qui ont été i
 
 \begin{figure}[ht]
     \center
-    \includegraphics[width = 0.6\textwidth]{figures/triplet_net}
-    \caption{\label{siamnet_arch} \textbf{Architecture d'un réseau triplet - changer d'image}
-    \cite{hoffer2014deep}}
+    \includegraphics[width = 0.6\textwidth]{figures/triplet_arch.pdf}
+    \caption{\label{fig:siamnet_arch} \textbf{Architecture d'un réseau triplet}}
 \end{figure}
 
 Les réseaux triplets sont une amélioration des réseaux siamois déjà susmentionnés. À chaque itération, le nombre
 d'images en entrée est de 3 : 
 
 \begin{itemize}
-    \item image de base
-    \item image similaire
-    \item image différente
+    \item image de base (anchor)
+    \item image similaire (positive)
+    \item image différente (negative)
 \end{itemize}
 
 Cela revient à ajouter un nouveau terme dans la fonction de perte du modèle. Cet ajout permet 
