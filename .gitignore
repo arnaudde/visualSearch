@@ -8,4 +8,8 @@ deep_fashion/
 report/*aux
 report/*log
 report/*pdf
+report/*bbl
+report/*blg
+report/*out
+report/*toc
 

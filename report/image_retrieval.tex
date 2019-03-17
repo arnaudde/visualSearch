@@ -1,0 +1,100 @@
+\section{Image retrieval}
+
+\subsection{Méthodologie}
+
+Après avoir défini différentes mesures de similarités entre paires d'images, nous nous sommes attaqués à la tache de
+recommandations visuelles d'images. Pour cela, nous avons utilisé la méthodologie suivante.
+
+
+Un utilisateur possède une image $i_{\text{query}}$, et veut retrouver des objets similaires à celle-ci dans une base de
+données $\bm{B}$ d'une entreprise. Cette base de donnee est constituées par les vecteurs de features des images que
+possède l'entreprise. On extrait de l'image $i_{\text{query}}$ un vecteur de features $x_{\text{query}}$ à l'aide du
+même modèle utilisé pour la base de données $\bm{B}$, puis on utilise une distance pour retrouver les $k$ plus proches
+voisins de ce vecteur $x_{\text{query}}$. Ces $k$ résultats sont alors la liste de recommandations vis-à-vis de l'image
+initial. Cette méthodologie est résumée dans la figure \ref{fig:pipeline_retrieval}.
+
+\begin{figure}[ht]
+    \center
+    \includegraphics[width = 0.8\textwidth]{figures/pipeline_retrieval.pdf}
+    \caption{Pipeline de la tâche d'image retrieval \label{fig:pipeline_retrieval}}
+\end{figure}
+
+Pour mesurer la performance de nos algorithmes, nous utilisons la mesure de \pycode{precision@k} \cite{visual2017zhai},
+qui peut se définir comme ceci : pour une requête $i_{\text{query}}$ et une liste de $k$ recommandations fournie par
+l'algorithme, on calcule $\text{P@K}$ :
+
+\begin{equation}
+    \text{P@K} = \ddfrac{\text{nombre réponses pertinentes}}{k}
+\end{equation}
+
+\subsection{Expériences}
+
+Pour nos expériences, nous avons utilisé le dataset CIFAR-10 \cite{learning2009krizhevsky}. Nous avons utilisé 10 000
+images du dataset d'entrainement pour constituer la base de données, et 1 000 images du dataset de test pour simuler les
+requêtes. Nous n'avons pas réentrainé Inception V3, tandis que nous avons entrainé les dernières layers de nos réseaux
+siamois et triplet sur les 10 000 images de notre base de données (i.e, nous n'avons pas touché aux poids d'Inception
+V3).
+
+\begin{tabular}{|l|c|c|c|}
+    \hline
+    & Inception v3 & Siamese & Triplet \\
+    \hline
+    P@k & 0.75 & 0.72 & 0.87 \\ 
+    \hline
+\end{tabular}
+ 
+Ainsi, on voit que le réseau triplet est le plus performant, ce qui était attendu puisque la tâche qu'il doit résoudre
+est considérée comme plus difficile. Cependant, on voit que le réseau siamois a de moins bonnes performances que le
+retrieval sur les simples features d'Inception V3, ce qui nous a surpris.
+
+\subsection{Robustesse aux transformations}
+
+Nous avons vu précédemment notre méthodologie pour dresser une liste de recommandations d'images en fonction d'une image
+requête donnée par un utilisateur. Cependant, nous avons utilisé dans nos expériences précédentes uniquement les images
+de nos datasets. Dans une application réelle d'image retrieval, les images requêtes des utilisateurs peuvent être très
+différentes de celles de la base de données : l'angle de vue, la qualité de l'image ainsi que sa luminosité peuvent être
+très différents ce qui peut influer sur la qualité des recommendations. L'objectif de cette section est de quantifier
+cette influence.
+
+TODO: ajouter des images pour illustrer l'effet des transformations sur les images en elles-mêmes.
+
+Pour cela, nous avons utilisé la méthode suivante : nous utilisons les images de notre dataset
+d'entrainenement non augmentées comme base de données dans laquelle nous allons chercher les images pertinentes au vu de
+l'image de requête. Nous extrayons de ces images de base des features à l'aide de nos différents modèles. 
+Pour les images de requête, nous utilisons les images du dataset de test, à laquelle nous appliquons les transformations
+\ref{enum:transformations} lors de l'extraction de features. Enfin, nous mesurons la \pycode{precision@k} pour chaque
+image de requête, et calculons la moyenne sur toutes les images de requête.
+\bigskip
+
+Pour nos expériences, nous avons utilisé la librairie Python \cite{imgaug}, utilisé $10 000$ images de notre dataset
+d'entrainement comme features de base, et $1000$ images de requête. Nous avons choisi d'appliquer les d\'eformations
+suivantes: 
+
+\begin{enumerate}
+        \label{enum:transformations}
+    \item Bruit blanc de valeur
+    \item Coarse Dropout
+    \item D\'eformation affine
+    \item Changement de luminosité
+\end{enumerate}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/comp_white_noise.png}
+    \label{fig:inception_WN_10}
+    \caption{Effet de l'ajout de bruit blanc sur la précision @ 10}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/comp_multiply.png}
+    \label{fig:inception_WN_10}
+    \caption{Effet de l'ajout du changement de la luminosité sur la précision @ 10}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/comp_coarse_dropout.png}
+    \label{fig:inception_WN_10}
+    \caption{Effet de l'ajout du coarse dropout sur la précision @ 10}
+\end{figure}
