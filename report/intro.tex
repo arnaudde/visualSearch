@@ -1,26 +1,32 @@
 \section*{Introduction}
 
-De nombreux sites de e-commerce ont à leur disposition des bases de données d’images. Cependant celles-ci sont souvent
-non-étiquetées et il est intéressant de pouvoir identifier les images de produits qui sont similaires. Le graal de cette
-recherche serait d’atteindre un “shazam des produits”. Ce projet a pour objectif de faire les premiers pas dans cette
-direction. 
+Les algorithmes de recommandations sont au coeur de la stratégie des entreprises de e-commerce afin de proposer à leurs
+clients des produits qui pourraient correspondre à leurs besoins. Ces algorithmes de recommandations, déjà éprouvés, se
+basent souvent sur l'établissement d'un profil utilisateur en fonction de son comportement sur le site : clics, pages
+visitées et produits achetés. Ce comportement est ensuite comparé à la liste des produits et aux comportements des
+autres clients à travers différentes méthodes, comme le "collaborative filtering" ou des modèles de clusters
+\cite{amazon2003linden}. Cependant, ces méthodes souffrent de nombreux défauts, comme un coût de calcul prohibitif
+empêchant un passage à grande échelle, ainsi qu'une précision faible \cite{deep2017shankar}.
 
-Grâce aux récents développements des techniques de Machine Learning et de Deep Learning, les systèmes de classification
-et de détection d’images sont maintenant à des niveaux de performance égalant les humains sur certaines tâches. Ils
-permettent d’extraire de manière automatique les informations essentielles caractérisant les images.
-
-Le coeur des techniques de matching repose sur l’apprentissage d’une représentation latente des images. C’est ainsi dans
-cet espace que l’étude de similarité est alors possible.
-
-Nous allons tout d'abord travailler sur l'apprentissage d'une fonction de similarité entre images, afin de nous attaquer
-au cas d'image matching.
+Enfin, un autre problème majeur de ses techniques est qu'elles reposent souvent sur des métadonnées ou des données
+textuelles. Or, dans le domaine de la mode, les utilisateurs souhaitent pouvoir chercher des produits et obtenir des
+recommandations basées sur des critères visuels. Il est donc crucial pour les sites de e-commerce, qui possèdent de
+grandes bases de données d'images mais non étiquetées, de pouvoir proposer des systèmes de recommandations basés sur
+ces critères visuels afin d’atteindre un “shazam des produits”. Ce projet a pour objectif de faire les premiers pas
+dans cette direction. 
 
 \subsection*{État de l'art}
 
-DETAILLER
-\bigskip
+Grâce aux récents développements des techniques de Machine Learning et de Deep Learning, les systèmes de classification
+et de détection d’images sont maintenant à des niveaux de performance égalant les humains sur certaines tâches. Ils
+permettent d’extraire de manière automatique les informations essentielles caractérisant les images.  Le coeur des
+techniques de matching repose sur l’apprentissage d’une représentation latente des images. C’est ainsi dans cet espace
+que l’étude de similarité est alors possible.
+
 Pour approcher ce problème, nous avons tout d'abord lu la littérature récente sur le sujet. Ainsi, nous avons lu des
-papiers de eBay, Pinterest. La tendance globale est une utilisation de features extraites d'un réseau de neurones.
+papiers de eBay, Pinterest. La tendance globale que nous avons observé est une utilisation de features extraites d'un
+réseau de neurones : les images sont projetées sont dans un espace vectoriel de dimension plus petite que la taille
+originale qui permet de séparer mieux les différentes classes.
 
 Toutefois, nous nous sommes retrouvés confrontés à un problème : ces entités possèdent un nombre gigantesque de données
 auxquels une personne lambda n'a pas accès. 

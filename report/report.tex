@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bbm}
+\usepackage{bm}
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{xcolor}
@@ -47,7 +48,9 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\prox}{prox}
 \DeclareMathOperator*{\Id}{Id}
+\DeclareMathOperator*{\simcos}{sim_{cos}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
 %======================== DEBUT DU DOCUMENT ========================
 
 \title{\'Etude de matching et de distances de similarité d’images}
@@ -84,7 +87,7 @@
 
 \include{intro}
 \include{visual_similarity}
-\include{robustness}
+\include{image_retrieval}
 \include{large_scale}
 
 \bibliographystyle{plain}

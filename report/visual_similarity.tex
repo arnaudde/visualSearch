@@ -1,18 +1,50 @@
 \section{Visual Similarity}
 
-Dans le but de faire de l'"Image Retrieval", nous somme d'abord pench\'e sur le probl\`eme d'apprendre une similarit\'e
-entre images. Nous avons pour cela \'evalu\'e diff\'erentes m\'ethodes, que nous allons pr\'esenter ci-dessous.
+Au coeur du problème de recommandation visuelle se trouve le choix d'une bonne similarité entre images, afin de classer
+les résultats proposés ensuite. Pour cela, nous nous sommes basés sur l'utilisation de features extraites de modèles de
+réseaux de neurones, que nous allons présenter ensuite.
 
 \subsection{Extraction de features}
+
+Le modèle le plus simple que nous avons utilisé est le réseau Inception V3 \cite{rethinking2015szegedy}, qui est une
+architecture de réseau de neurones relativement légère et efficiente d'un point de vue computationnelle qui se situe
+dans l'état de l'art en classification sur le dataset ImageNet \cite{imagenet_cvpr09}.
+
+Nous appliquons cette architecture sur notre base de données afin de récupérer les vecteurs de features de nos images,
+et nous utilisons différentes métriques pour mesurer les similarités entre paires d'images.
+
+\subsubsection{Distance euclidienne}
+
+Afin de mesurer la similarité entre deux images, nous nous sommes d'abord intéressés à la distance euclidienne entre
+deux vecteurs, définie comme cela :
+\begin{equation}
+    d_{\text{eucl}} = \norm{x_1 - x_2}_2 = \sqrt{\sum_{i=1}^n (x_{1,i} - x_{2,i})^2}
+\end{equation}
+
+où $x_1, x_2$ représentent les features extraites à l'aide d'Inception v3, $n$ la taille de ces features, et $x_{\cdot,
+i}$ la composante $i$ du vecteur $x_{\cdot}$.
+
+\subsubsection{Similarité cosinus}
+
+Nous avons ensuite utilisé la similarité cosinus entre deux vecteurs :
+\begin{equation}
+    \simcos (x_1, x_2) = \frac{x_1 \cdot x_2}{\norm{x_1}_2 \norm{x_2}}
+\end{equation}
+
+Les valeurs de $\simcos$ appartiennent à $\left[-1, 1\right]$. La valeur $1$ indique que les vecteurs sont égaux, $0$
+que les vecteurs sont décorrélés, et $-1$ que les vecteurs sont négativement corrélés. Les valeurs intermédiaires
+mesurent le degré de similarité entre les vecteurs considérés.
+
+\subsubsection{Distance Hamming}
+
+Enfin, nous avons binarisé nos features, et utilisé une distance de Hamming pour mesurer les performances
 
 \subsection{R\'eseaux Siamois}
  
 \begin{figure}[ht]
- \center
- \includegraphics[width = 0.8\textwidth]{figures/siamnet_arch}
- \caption{\label{siamnet_arch} \textbf{Architecture d'un r\'eseau siamois} Les poids des deux r\'eseaux sont li\'es. L'avant derni\`ere
-    couche induit une m\'etrique apprise sur l'espace des features apprises. \textit{p} est une pr\'ediction logistique.
-    \cite{koch2015siamese}}
+    \center
+    \includegraphics[width = 0.8\textwidth]{figures/siamese_arch.pdf}
+    \caption{\label{siamnet_arch} \textbf{Architecture d'un r\'eseau siamois}}
 \end{figure}
 
 \subsection{R\'eseaux Triplets}
