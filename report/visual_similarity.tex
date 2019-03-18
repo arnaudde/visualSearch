@@ -49,16 +49,16 @@ deux signatures étaient identiques. Nous représentons l'architecture que nous 
 On prend une paire d'images appartenant ou non à la même classe, et on extrait de chaque image un vecteur de feature
 avec le même DNN (Deep Neural Network). Dans notre cas, nous avons utilisé Inception V3 sans la dernière couche. On
 soustrait ensuite les deux vecteurs avant de leur appliquer la fonction valeur absolue. On applique ensuite au résultat
-une Fully Connected Layer (FCN) pour réduire la taille de l'embedding, puis une sigmoïde qui donne la probabilité que
+une Fully Connected layer (FC) pour réduire la taille de l'embedding, puis une sigmoïde qui donne la probabilité que
 les deux images appartiennent à la même classe.
 
-Pour extraire les features de notre réseau siamois entrainé, nous récupérons les poids $W$ et $b$ de la couche FCN. Nous
+Pour extraire les features de notre réseau siamois entrainé, nous récupérons les poids $W$ et $b$ de la couche FC. Nous
 utilisons le DNN utilisé par le réseau siamois pour extraire une feature $x$ d'une image, puis nous calculons $Wx + b$
 pour obtenir la feature finale.
 
 \begin{figure}[ht]
     \center
-    \includegraphics[width = 0.8\textwidth]{figures/siamese_arch.pdf}
+    \includegraphics[width = 0.85\textwidth]{figures/siamese_arch.pdf}
     \caption{\label{fig:siamese_arch} \textbf{Architecture d'un r\'eseau siamois}}
 \end{figure}
 
@@ -69,7 +69,7 @@ Nous avons aussi essayé d'utiliser un \textit{réseau triplet}, qui ont été i
 
 \begin{figure}[ht]
     \center
-    \includegraphics[width = 0.6\textwidth]{figures/triplet_arch.pdf}
+    \includegraphics[width = 0.85\textwidth]{figures/triplet_arch.pdf}
     \caption{\label{fig:siamnet_arch} \textbf{Architecture d'un réseau triplet}}
 \end{figure}
 

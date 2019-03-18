@@ -1,0 +1,47 @@
+\section{État de l'art}
+
+Avant l’avènement du Deep Learning les modèles était appris à partir de caractéristiques classiques telles que les
+descripteurs SIFT [21] ou HOG [8]. Cependant, ces modèles sont limités par le pouvoir expressif. Au cours des dernières
+années, les réseaux convolutionnels profonds ont été utilisés avec un succès sans précédent pour la reconnaissance
+d'objet [15, 27, 28]
+
+Comme on le sait, les couches successives du CNN représentent l'image avec des niveaux d'abstraction croissants. Les
+couches finales contiennent des vecteurs descripteurs abstraits pour l’image, robustes aux variations d’échelle, de
+localisation dans l’image, de différences de points de vue, d’occlusion, etc. Cependant, ces descripteurs ne sont pas
+très précis. La similarité visuelle puisque la similarité est une fonction de la compréhension des concepts abstraits de
+haut niveau (les chemises correspondent aux autres chemises, pas aux chaussures) ainsi que des détails de bas niveau
+(couleur de la chemise, motif : rayure, carreaux, etc….). Les détails de bas niveau sont exactement ce que le réseau de
+détection d'objets a appris à ignorer (car il veut reconnaître une chemise indépendamment du fait qu’elle soit rose ou
+jaune, à rayures ou à carreaux). En d'autres termes, le réseau de reconnaissance d’objet se concentre sur les
+caractéristiques communes à tous les objets de cette catégorie, en ignorant les détails qui sont souvent pourtant
+important pour l'estimation de la similarité. Cela réduit son efficacité comme estimateur de similarité. Notre étude
+étant basée sur le dataset Cifar-10 qui est de très basse résolution nous n’avons pas observé ce phénomène
+
+Grâce aux récents développements des techniques de Machine Learning et de Deep Learning, les systèmes de classification
+et de détection d’images sont maintenant à des niveaux de performance égalant les humains sur certaines tâches. Ils
+permettent d’extraire de manière automatique les informations essentielles caractérisant les images.  Le coeur des
+techniques de matching repose sur l’apprentissage d’une représentation latente des images. C’est ainsi dans cet espace
+que l’étude de similarité est alors possible.
+
+Pour approcher ce problème, nous avons tout d'abord lu la littérature récente sur le sujet. Ainsi, nous avons lu des
+papiers de eBay, Pinterest. La tendance globale que nous avons observé est une utilisation de features extraites d'un
+réseau de neurones : les images sont projetées dans un espace vectoriel de dimension plus petite que la taille
+originale qui permet de séparer mieux les différentes classes.
+
+Toutefois, nous nous sommes retrouvés confrontés à un problème : ces entités possèdent un nombre gigantesque de données
+auxquels une personne lambda n'a pas accès. 
+
+Par ailleurs, cette quantité de données possèdent parfois une structure particulière qui rend possible l'utilisation de
+méthodes spécialisées : Pinterest, par son statut de réseau social, possèdent des données organisées en graphes, et
+utilise donc des méthodes spécialisées. Ainsi, dans leur article \cite{ying2018graph}, Pinterest utilise des
+\textit{Graph Convolutional Neural Networks} (GCN), ce qui est possible uniquement grâce à la structure sous-jacente de
+graphe d'un réseau social.
+
+De même, eBay utilise dans \cite{yang2017visual} des métadonnées associées aux produits de sa plateforme. Dans cet
+article, eBay utilise un système de couches pour un retrieval précis et rapide à grande échelle : pour une image requête
+particulière, leur système utilise différents critères pour épurer petit à petit les résultats potentiels. Ils utilisent
+d'abord des features peu coûteuses à calculer et dont la comparaison est simple.
+
+Nous nous sommes concentrés sur l'aspect "Image Retrieval" en prenant compte des features extraites de réseaux de
+neurones profonds sans métadonnées. Pour cette extraction de features, nous allons comparer différents modèles que nous
+allons présenter après.

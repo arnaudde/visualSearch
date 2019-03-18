@@ -1,0 +1,19 @@
+\section{Pistes d'études}
+
+Au vu de nos bonnes performances sur le dataset CIFAR-10 nous avons cherché à appliquer nos méthodes à de nouveaux
+datasets. Un des datasets qui semble intéressant est celui des bâtiments
+d’Oxford \cite{object2007philbin}. Il comporte 10 classes et environ 2000 images avec des
+labels et de bonnes qualités. Malheureusement nous n’avons pas réussi à avoir des résultats satisfaisants. Nous avons en
+fait réussi à faire converger le réseau siamois mais nous n’avons pas réussi à faire marcher l’entrainement du réseau de
+triplets. Nous plafonnons donc à une précision à 10 de 0.15 que ce soit avec la représentation latente d’image net ou
+avec celle du réseau siamois. Nous avons essayé de changer de réseau et d’essayer avec ResNet50 sans succès. La revue de
+la littérature autour de ce problème semble indiquer qu’il s’agit plutôt d’un dataset de test que d’entrainement du fait
+de la difficulté du problème et du petit nombre d’image.
+
+D’après \cite{end2017gordo}, il semblerait qu’il faille pré-entrainer le réseau de triplet sur un autre dataset de
+bâtiments comme celui-ci utilisé dans \cite{neural2014babenko}  ou utiliser un réseau plus profond comme ResNet101
+\cite{deep2015he}. Malheureusement, les poids du réseau pré-entrainé ne sont pas disponible dans Keras.
+
+En plus, d’essayer nos modèles sur d’autres datasets il aurait été intéressant d’explorer d’autres techniques éprouvées
+sur ce problème particulier comme l’architecture R-Mac \cite{particular2015tolias}.
+
